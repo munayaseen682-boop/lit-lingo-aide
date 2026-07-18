@@ -77,14 +77,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
+      { title: "LitLingo AI" },
+      { name: "description", content: "LitLingo AI is an AI-powered study companion for English Literature and Linguistics students. It helps users understand literary texts, learn linguistics concep" },
       { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { property: "og:title", content: "LitLingo AI" },
+      { property: "og:description", content: "LitLingo AI is an AI-powered study companion for English Literature and Linguistics students. It helps users understand literary texts, learn linguistics concep" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:title", content: "LitLingo AI" },
+      { name: "twitter:description", content: "LitLingo AI is an AI-powered study companion for English Literature and Linguistics students. It helps users understand literary texts, learn linguistics concep" },
+      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/17e247ef-5151-4edb-994d-0a90d436a666" },
+      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/17e247ef-5151-4edb-994d-0a90d436a666" },
     ],
     links: [
       {

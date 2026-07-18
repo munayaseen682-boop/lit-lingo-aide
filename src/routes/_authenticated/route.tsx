@@ -36,7 +36,7 @@ function AuthedLayout() {
   const { user } = Route.useRouteContext();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const pathname = useRouterState({ select: (s: { location: { pathname: string } }) => s.location.pathname });
   const [displayName, setDisplayName] = useState<string>(user.email ?? "");
 
   useEffect(() => {

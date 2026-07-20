@@ -11,6 +11,7 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { supabase } from "@/integrations/supabase/client";
 
 function NotFoundComponent() {
   return (
@@ -127,6 +128,31 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const router = useRouter();
+
+  useEffect(() => {
+    // Redirect signed-in users away from public routes and keep router in sync.
+    supabase.auth.getSession().then(({ data }) => {
+      if (!data.session) return;
+      const path = window.location.pathname;
+      if (path === "/" || path === "/auth") {
+        router.navigate({ to: "/dashboard", replace: true });
+      }
+    });
+
+    const { data: sub } = supabase.auth.onAuthStateChange((event, session) => {
+      if (event !== "SIGNED_IN" && event !== "SIGNED_OUT" && event !== "USER_UPDATED") return;
+      router.invalidate();
+      if (event === "SIGNED_IN" && session) {
+        const path = window.location.pathname;
+        if (path === "/" || path === "/auth") {
+          router.navigate({ to: "/dashboard", replace: true });
+        }
+      }
+      if (event !== "SIGNED_OUT") queryClient.invalidateQueries();
+    });
+    return () => sub.subscription.unsubscribe();
+  }, [router, queryClient]);
 
   return (
     <QueryClientProvider client={queryClient}>

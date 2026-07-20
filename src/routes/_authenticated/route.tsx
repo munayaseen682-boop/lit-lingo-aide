@@ -25,11 +25,11 @@ export const Route = createFileRoute("/_authenticated")({
 });
 
 const navItems = [
-  { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
-  { to: "/dashboard", label: "Analyze", icon: BookOpen, disabled: true },
-  { to: "/dashboard", label: "Linguistics", icon: Sparkles, disabled: true },
-  { to: "/dashboard", label: "Quiz", icon: GraduationCap, disabled: true },
-  { to: "/dashboard", label: "Chat", icon: MessagesSquare, disabled: true },
+  { to: "/dashboard" as const, label: "Dashboard", icon: LayoutDashboard, disabled: false },
+  { to: "/analyze" as const, label: "Analyze", icon: BookOpen, disabled: false },
+  { to: "/dashboard" as const, label: "Linguistics", icon: Sparkles, disabled: true },
+  { to: "/dashboard" as const, label: "Quiz", icon: GraduationCap, disabled: true },
+  { to: "/dashboard" as const, label: "Chat", icon: MessagesSquare, disabled: true },
 ];
 
 function AuthedLayout() {

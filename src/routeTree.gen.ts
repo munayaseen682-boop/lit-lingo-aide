@@ -15,6 +15,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedQuizRouteImport } from './routes/_authenticated/quiz'
 import { Route as AuthenticatedLinguisticsRouteImport } from './routes/_authenticated/linguistics'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
+import { Route as AuthenticatedChatRouteImport } from './routes/_authenticated/chat'
 import { Route as AuthenticatedAnalyzeRouteImport } from './routes/_authenticated/analyze'
 
 const AuthRoute = AuthRouteImport.update({
@@ -47,6 +48,11 @@ const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedChatRoute = AuthenticatedChatRouteImport.update({
+  id: '/chat',
+  path: '/chat',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedAnalyzeRoute = AuthenticatedAnalyzeRouteImport.update({
   id: '/analyze',
   path: '/analyze',
@@ -57,6 +63,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/analyze': typeof AuthenticatedAnalyzeRoute
+  '/chat': typeof AuthenticatedChatRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/linguistics': typeof AuthenticatedLinguisticsRoute
   '/quiz': typeof AuthenticatedQuizRoute
@@ -65,6 +72,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/analyze': typeof AuthenticatedAnalyzeRoute
+  '/chat': typeof AuthenticatedChatRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/linguistics': typeof AuthenticatedLinguisticsRoute
   '/quiz': typeof AuthenticatedQuizRoute
@@ -75,6 +83,7 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
   '/_authenticated/analyze': typeof AuthenticatedAnalyzeRoute
+  '/_authenticated/chat': typeof AuthenticatedChatRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/linguistics': typeof AuthenticatedLinguisticsRoute
   '/_authenticated/quiz': typeof AuthenticatedQuizRoute
@@ -85,17 +94,26 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/analyze'
+    | '/chat'
     | '/dashboard'
     | '/linguistics'
     | '/quiz'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/analyze' | '/dashboard' | '/linguistics' | '/quiz'
+  to:
+    | '/'
+    | '/auth'
+    | '/analyze'
+    | '/chat'
+    | '/dashboard'
+    | '/linguistics'
+    | '/quiz'
   id:
     | '__root__'
     | '/'
     | '/_authenticated'
     | '/auth'
     | '/_authenticated/analyze'
+    | '/_authenticated/chat'
     | '/_authenticated/dashboard'
     | '/_authenticated/linguistics'
     | '/_authenticated/quiz'
@@ -151,6 +169,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/chat': {
+      id: '/_authenticated/chat'
+      path: '/chat'
+      fullPath: '/chat'
+      preLoaderRoute: typeof AuthenticatedChatRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/analyze': {
       id: '/_authenticated/analyze'
       path: '/analyze'
@@ -163,6 +188,7 @@ declare module '@tanstack/react-router' {
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedAnalyzeRoute: typeof AuthenticatedAnalyzeRoute
+  AuthenticatedChatRoute: typeof AuthenticatedChatRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedLinguisticsRoute: typeof AuthenticatedLinguisticsRoute
   AuthenticatedQuizRoute: typeof AuthenticatedQuizRoute
@@ -170,6 +196,7 @@ interface AuthenticatedRouteRouteChildren {
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAnalyzeRoute: AuthenticatedAnalyzeRoute,
+  AuthenticatedChatRoute: AuthenticatedChatRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedLinguisticsRoute: AuthenticatedLinguisticsRoute,
   AuthenticatedQuizRoute: AuthenticatedQuizRoute,

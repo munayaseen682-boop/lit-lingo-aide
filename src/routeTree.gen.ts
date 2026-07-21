@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedQuizRouteImport } from './routes/_authenticated/quiz'
 import { Route as AuthenticatedLinguisticsRouteImport } from './routes/_authenticated/linguistics'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedAnalyzeRouteImport } from './routes/_authenticated/analyze'
@@ -29,6 +30,11 @@ const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedQuizRoute = AuthenticatedQuizRouteImport.update({
+  id: '/quiz',
+  path: '/quiz',
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedLinguisticsRoute =
   AuthenticatedLinguisticsRouteImport.update({
@@ -53,6 +59,7 @@ export interface FileRoutesByFullPath {
   '/analyze': typeof AuthenticatedAnalyzeRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/linguistics': typeof AuthenticatedLinguisticsRoute
+  '/quiz': typeof AuthenticatedQuizRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -60,6 +67,7 @@ export interface FileRoutesByTo {
   '/analyze': typeof AuthenticatedAnalyzeRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/linguistics': typeof AuthenticatedLinguisticsRoute
+  '/quiz': typeof AuthenticatedQuizRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -69,12 +77,19 @@ export interface FileRoutesById {
   '/_authenticated/analyze': typeof AuthenticatedAnalyzeRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/linguistics': typeof AuthenticatedLinguisticsRoute
+  '/_authenticated/quiz': typeof AuthenticatedQuizRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth' | '/analyze' | '/dashboard' | '/linguistics'
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/analyze'
+    | '/dashboard'
+    | '/linguistics'
+    | '/quiz'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/analyze' | '/dashboard' | '/linguistics'
+  to: '/' | '/auth' | '/analyze' | '/dashboard' | '/linguistics' | '/quiz'
   id:
     | '__root__'
     | '/'
@@ -83,6 +98,7 @@ export interface FileRouteTypes {
     | '/_authenticated/analyze'
     | '/_authenticated/dashboard'
     | '/_authenticated/linguistics'
+    | '/_authenticated/quiz'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -114,6 +130,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/quiz': {
+      id: '/_authenticated/quiz'
+      path: '/quiz'
+      fullPath: '/quiz'
+      preLoaderRoute: typeof AuthenticatedQuizRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/linguistics': {
       id: '/_authenticated/linguistics'
       path: '/linguistics'
@@ -142,12 +165,14 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedAnalyzeRoute: typeof AuthenticatedAnalyzeRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedLinguisticsRoute: typeof AuthenticatedLinguisticsRoute
+  AuthenticatedQuizRoute: typeof AuthenticatedQuizRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAnalyzeRoute: AuthenticatedAnalyzeRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedLinguisticsRoute: AuthenticatedLinguisticsRoute,
+  AuthenticatedQuizRoute: AuthenticatedQuizRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =

@@ -27,8 +27,8 @@ export const Route = createFileRoute("/_authenticated")({
 const navItems = [
   { to: "/dashboard" as const, label: "Dashboard", icon: LayoutDashboard, disabled: false },
   { to: "/analyze" as const, label: "Analyze", icon: BookOpen, disabled: false },
-  { to: "/dashboard" as const, label: "Linguistics", icon: Sparkles, disabled: true },
-  { to: "/dashboard" as const, label: "Quiz", icon: GraduationCap, disabled: true },
+  { to: "/linguistics" as const, label: "Linguistics", icon: Sparkles, disabled: false },
+  { to: "/quiz" as const, label: "Quiz", icon: GraduationCap, disabled: false },
   { to: "/dashboard" as const, label: "Chat", icon: MessagesSquare, disabled: true },
 ];
 

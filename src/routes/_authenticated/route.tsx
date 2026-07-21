@@ -29,7 +29,7 @@ const navItems = [
   { to: "/analyze" as const, label: "Analyze", icon: BookOpen, disabled: false },
   { to: "/linguistics" as const, label: "Linguistics", icon: Sparkles, disabled: false },
   { to: "/quiz" as const, label: "Quiz", icon: GraduationCap, disabled: false },
-  { to: "/dashboard" as const, label: "Chat", icon: MessagesSquare, disabled: true },
+  { to: "/chat" as const, label: "Chat", icon: MessagesSquare, disabled: false },
 ];
 
 function AuthedLayout() {

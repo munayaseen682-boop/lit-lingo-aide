@@ -35,10 +35,11 @@ const tools = [
   {
     icon: MessagesSquare,
     title: "AI Tutor Chat",
-    desc: "Threaded conversations with a tutor that remembers context.",
-    to: "/dashboard" as const,
-    available: false,
+    desc: "Threaded conversations with a tutor that remembers context. English, Urdu, and Hinglish.",
+    to: "/chat" as const,
+    available: true,
   },
+
 ];
 
 function Dashboard() {

@@ -15,7 +15,7 @@ export const Route = createFileRoute("/_authenticated/chat")({
       {
         name: "description",
         content:
-          "Chat with an AI tutor for English Literature, Linguistics, Grammar, and Academic Writing. Supports English, Urdu, and Hinglish.",
+          "Chat with an AI tutor for English Literature, Linguistics, Grammar, and Academic Writing. Supports English and Urdu.",
       },
     ],
   }),
@@ -27,7 +27,7 @@ const STORAGE_KEY = "litlingo:tutor-chat:v1";
 const WELCOME: ChatMessage = {
   role: "assistant",
   content:
-    "Assalamu alaikum! I'm your LitLingo AI Tutor. Ask me anything about English Literature, Linguistics, Grammar, Poetry, Novels, Literary Theory, or Academic Writing.\n\nYou can write in **English**, **Urdu**, or **Hinglish** — I'll reply in the same style.",
+    "Assalamu alaikum! I'm your LitLingo AI Tutor. Ask me anything about English Literature, Linguistics, Grammar, Poetry, Novels, Literary Theory, or Academic Writing.\n\nYou can write in **English** or **Urdu** — I'll reply in the same style.",
 };
 
 function renderMarkdown(md: string) {

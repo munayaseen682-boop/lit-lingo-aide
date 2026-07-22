@@ -152,6 +152,18 @@ function AuthedLayout() {
                 </div>
               </DropdownMenuLabel>
               <DropdownMenuSeparator />
+              {installPrompt && !isInstalled && (
+                <DropdownMenuItem onClick={handleInstallClick}>
+                  <Download className="mr-2 h-4 w-4" />
+                  Install App
+                </DropdownMenuItem>
+              )}
+              {isInstalled && (
+                <DropdownMenuItem disabled>
+                  <Download className="mr-2 h-4 w-4" />
+                  App Installed
+                </DropdownMenuItem>
+              )}
               <DropdownMenuItem onClick={signOut} className="text-destructive focus:text-destructive">
                 <LogOut className="mr-2 h-4 w-4" />
                 Sign out

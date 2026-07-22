@@ -15,7 +15,7 @@ export const Route = createFileRoute("/_authenticated/chat")({
       {
         name: "description",
         content:
-          "Chat with an AI tutor for English Literature, Linguistics, Grammar, and Academic Writing. Supports English, Urdu, and Hinglish.",
+          "Chat with an AI tutor for English Literature, Linguistics, Grammar, and Academic Writing. Supports English and Urdu.",
       },
     ],
   }),
@@ -27,7 +27,7 @@ const STORAGE_KEY = "litlingo:tutor-chat:v1";
 const WELCOME: ChatMessage = {
   role: "assistant",
   content:
-    "Assalamu alaikum! I'm your LitLingo AI Tutor. Ask me anything about English Literature, Linguistics, Grammar, Poetry, Novels, Literary Theory, or Academic Writing.\n\nYou can write in **English**, **Urdu**, or **Hinglish** — I'll reply in the same style.",
+    "Assalamu alaikum! I'm your LitLingo AI Tutor. Ask me anything about English Literature, Linguistics, Grammar, Poetry, Novels, Literary Theory, or Academic Writing.\n\nYou can write in **English** or **Urdu** — I'll reply in the same style.",
 };
 
 function renderMarkdown(md: string) {
@@ -165,7 +165,7 @@ function ChatPage() {
           <div>
             <h1 className="font-serif text-2xl font-semibold md:text-3xl">AI Tutor Chat</h1>
             <p className="text-xs text-muted-foreground md:text-sm">
-              English • Urdu • Hinglish — technical terms stay in English.
+              English • Urdu — technical terms stay in English.
             </p>
           </div>
         </div>
@@ -228,7 +228,7 @@ function ChatPage() {
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={handleKey}
-          placeholder="Ask about a poem, grammar rule, essay draft… (English / Urdu / Hinglish)"
+          placeholder="Ask about a poem, grammar rule, essay draft… (English / Urdu)"
           rows={2}
           className="min-h-[52px] resize-none"
           disabled={isLoading}

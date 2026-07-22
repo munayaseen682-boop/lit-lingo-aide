@@ -35,7 +35,7 @@ const tools = [
   {
     icon: MessagesSquare,
     title: "AI Tutor Chat",
-    desc: "Threaded conversations with a tutor that remembers context. English, Urdu, and Hinglish.",
+    desc: "Threaded conversations with a tutor that remembers context. English and Urdu.",
     to: "/chat" as const,
     available: true,
   },

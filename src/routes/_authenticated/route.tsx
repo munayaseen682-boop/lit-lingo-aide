@@ -1,5 +1,5 @@
 import { createFileRoute, Outlet, redirect, Link, useNavigate, useRouterState } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import {
@@ -11,8 +11,13 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { LogOut, BookOpen, Sparkles, GraduationCap, MessagesSquare, LayoutDashboard } from "lucide-react";
+import { LogOut, BookOpen, Sparkles, GraduationCap, MessagesSquare, LayoutDashboard, Download } from "lucide-react";
 import { useQueryClient } from "@tanstack/react-query";
+
+interface BeforeInstallPromptEvent extends Event {
+  prompt: () => Promise<void>;
+  userChoice: Promise<{ outcome: "accepted" | "dismissed"; platform: string }>;
+}
 
 export const Route = createFileRoute("/_authenticated")({
   ssr: false,

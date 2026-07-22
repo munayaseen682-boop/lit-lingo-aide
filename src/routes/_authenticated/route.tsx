@@ -43,6 +43,8 @@ function AuthedLayout() {
   const queryClient = useQueryClient();
   const pathname = useRouterState({ select: (s: { location: { pathname: string } }) => s.location.pathname });
   const [displayName, setDisplayName] = useState<string>(user.email ?? "");
+  const [installPrompt, setInstallPrompt] = useState<BeforeInstallPromptEvent | null>(null);
+  const [isInstalled, setIsInstalled] = useState<boolean>(false);
 
   useEffect(() => {
     supabase
@@ -54,6 +56,40 @@ function AuthedLayout() {
         if (data?.display_name) setDisplayName(data.display_name);
       });
   }, [user.id]);
+
+  useEffect(() => {
+    const handleBeforeInstallPrompt = (e: Event) => {
+      e.preventDefault();
+      setInstallPrompt(e as BeforeInstallPromptEvent);
+    };
+
+    const handleAppInstalled = () => {
+      setInstallPrompt(null);
+      setIsInstalled(true);
+    };
+
+    if (window.matchMedia("(display-mode: standalone)").matches || (window.navigator as unknown as { standalone?: boolean }).standalone) {
+      setIsInstalled(true);
+    }
+
+    window.addEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
+    window.addEventListener("appinstalled", handleAppInstalled);
+
+    return () => {
+      window.removeEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
+      window.removeEventListener("appinstalled", handleAppInstalled);
+    };
+  }, []);
+
+  const handleInstallClick = useCallback(async () => {
+    if (!installPrompt) return;
+    await installPrompt.prompt();
+    const { outcome } = await installPrompt.userChoice;
+    if (outcome === "accepted") {
+      setInstallPrompt(null);
+      setIsInstalled(true);
+    }
+  }, [installPrompt]);
 
   async function signOut() {
     await queryClient.cancelQueries();

@@ -165,7 +165,7 @@ function ChatPage() {
           <div>
             <h1 className="font-serif text-2xl font-semibold md:text-3xl">AI Tutor Chat</h1>
             <p className="text-xs text-muted-foreground md:text-sm">
-              English • Urdu • Hinglish — technical terms stay in English.
+              English • Urdu — technical terms stay in English.
             </p>
           </div>
         </div>
@@ -228,7 +228,7 @@ function ChatPage() {
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={handleKey}
-          placeholder="Ask about a poem, grammar rule, essay draft… (English / Urdu / Hinglish)"
+          placeholder="Ask about a poem, grammar rule, essay draft… (English / Urdu)"
           rows={2}
           className="min-h-[52px] resize-none"
           disabled={isLoading}

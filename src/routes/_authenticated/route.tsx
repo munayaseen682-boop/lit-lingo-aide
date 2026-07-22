@@ -1,5 +1,5 @@
 import { createFileRoute, Outlet, redirect, Link, useNavigate, useRouterState } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import {
@@ -11,8 +11,13 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { LogOut, BookOpen, Sparkles, GraduationCap, MessagesSquare, LayoutDashboard } from "lucide-react";
+import { LogOut, BookOpen, Sparkles, GraduationCap, MessagesSquare, LayoutDashboard, Download } from "lucide-react";
 import { useQueryClient } from "@tanstack/react-query";
+
+interface BeforeInstallPromptEvent extends Event {
+  prompt: () => Promise<void>;
+  userChoice: Promise<{ outcome: "accepted" | "dismissed"; platform: string }>;
+}
 
 export const Route = createFileRoute("/_authenticated")({
   ssr: false,
@@ -38,6 +43,8 @@ function AuthedLayout() {
   const queryClient = useQueryClient();
   const pathname = useRouterState({ select: (s: { location: { pathname: string } }) => s.location.pathname });
   const [displayName, setDisplayName] = useState<string>(user.email ?? "");
+  const [installPrompt, setInstallPrompt] = useState<BeforeInstallPromptEvent | null>(null);
+  const [isInstalled, setIsInstalled] = useState<boolean>(false);
 
   useEffect(() => {
     supabase
@@ -49,6 +56,40 @@ function AuthedLayout() {
         if (data?.display_name) setDisplayName(data.display_name);
       });
   }, [user.id]);
+
+  useEffect(() => {
+    const handleBeforeInstallPrompt = (e: Event) => {
+      e.preventDefault();
+      setInstallPrompt(e as BeforeInstallPromptEvent);
+    };
+
+    const handleAppInstalled = () => {
+      setInstallPrompt(null);
+      setIsInstalled(true);
+    };
+
+    if (window.matchMedia("(display-mode: standalone)").matches || (window.navigator as unknown as { standalone?: boolean }).standalone) {
+      setIsInstalled(true);
+    }
+
+    window.addEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
+    window.addEventListener("appinstalled", handleAppInstalled);
+
+    return () => {
+      window.removeEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
+      window.removeEventListener("appinstalled", handleAppInstalled);
+    };
+  }, []);
+
+  const handleInstallClick = useCallback(async () => {
+    if (!installPrompt) return;
+    await installPrompt.prompt();
+    const { outcome } = await installPrompt.userChoice;
+    if (outcome === "accepted") {
+      setInstallPrompt(null);
+      setIsInstalled(true);
+    }
+  }, [installPrompt]);
 
   async function signOut() {
     await queryClient.cancelQueries();
@@ -111,6 +152,18 @@ function AuthedLayout() {
                 </div>
               </DropdownMenuLabel>
               <DropdownMenuSeparator />
+              {installPrompt && !isInstalled && (
+                <DropdownMenuItem onClick={handleInstallClick}>
+                  <Download className="mr-2 h-4 w-4" />
+                  Install App
+                </DropdownMenuItem>
+              )}
+              {isInstalled && (
+                <DropdownMenuItem disabled>
+                  <Download className="mr-2 h-4 w-4" />
+                  App Installed
+                </DropdownMenuItem>
+              )}
               <DropdownMenuItem onClick={signOut} className="text-destructive focus:text-destructive">
                 <LogOut className="mr-2 h-4 w-4" />
                 Sign out

@@ -1,53 +1,76 @@
-# Resume LitLingo AI — Phase 1: Foundation & Auth
+# Plan: Make LitLingo AI an Installable PWA on Android
 
-Picking up where we left off. Lovable Cloud is enabled, Google + Email auth are configured. Now we build the visible foundation.
+## Goal
+Transform the existing LitLingo AI web app into a professional, installable Progressive Web App (PWA) for Android phones without changing or removing any current features, AI functionality, design, data, or authentication. This will provide an app icon, app name, splash screen, and an "Install App" option.
 
-## What ships in this phase
+## Scope: Manifest-Only Installability
+This plan uses **manifest-only PWA support** because the request is for installability (app icon, home screen, splash screen, install prompt). It does **not** add offline support or service workers. The app will still require an internet connection to reach the AI backend, auth, and database — the same behavior as today.
 
-1. **Landing page (`/`)** — replaces the template placeholder at `src/routes/index.tsx`
-   - Hero: "LitLingo AI — Your AI Study Companion for Literature & Linguistics"
-   - Feature grid: Literature Analyzer, Linguistics & Grammar, Quiz Generator, AI Tutor Chat
-   - CTA buttons → `/auth` (Sign in / Get started)
-   - Footer with short about + course credit line
-   - SEO head(): unique title, description, og tags
+## What Will Change
 
-2. **Auth page (`/auth`)** — `src/routes/auth.tsx`
-   - Tabs: Sign in / Sign up (email + password)
-   - "Continue with Google" button
-   - On success → redirect to `/dashboard`
-   - Uses `supabase.auth` from `@/integrations/supabase/client`
+### 1. Web App Manifest
+Create `public/manifest.webmanifest` with:
+- `name`: "LitLingo AI"
+- `short_name`: "LitLingo" (fits under phone icons)
+- `description`: existing app description
+- `start_url`: "/"
+- `scope`: "/"
+- `display`: "standalone" (opens like a native app)
+- `background_color`: warm parchment background color
+- `theme_color`: deep navy primary color
+- `icons`: 192x192, 512x512, and a maskable 512x512 icon for Android adaptive icons
 
-3. **Protected layout (`/_authenticated`)** — `src/routes/_authenticated/route.tsx`
-   - Uses the integration-managed auth gate (redirects to `/auth` if no session)
-   - Renders a top nav (logo, links to Dashboard / Analyze / Linguistics / Quiz / Chat, sign-out) and `<Outlet />`
+### 2. App Icons
+Generate a set of brand icons that match the existing design system (warm parchment, deep navy, serif "L" mark). Place them in `public/`:
+- `icon-192x192.png`
+- `icon-512x512.png`
+- `maskable-icon-512x512.png` (safe-zone padding for Android adaptive shapes)
+- `apple-touch-icon-180x180.png` (for iOS home-screen as well)
 
-4. **Dashboard stub (`/_authenticated/dashboard`)** — `src/routes/_authenticated/dashboard.tsx`
-   - Welcome header with user's name/email
-   - Four feature cards linking to the tools (real functionality lands in Phase 3–4)
-   - Placeholder empty states for "Recent chats" and "Saved analyses"
+### 3. Head Metadata Updates
+Update `src/routes/__root.tsx` to add in `head().links`:
+- `<link rel="manifest" href="/manifest.webmanifest" />`
+- `<meta name="theme-color" content="..." />` (added to meta list)
+- Apple touch icon link
+- Mobile-web-app meta tags (`mobile-web-app-capable`, `apple-mobile-web-app-capable`, `apple-mobile-web-app-status-bar-style`)
 
-5. **Profiles table + trigger** — migration
-   - `public.profiles` (id uuid PK → auth.users, display_name, avatar_url, created_at, updated_at)
-   - GRANTs (authenticated + service_role), RLS enabled
-   - Policies: users can select/update own profile
-   - Trigger on `auth.users` insert → auto-create profile row
+Replace the default `<link rel="icon" href="/favicon.ico" />` with a new favicon and remove the template `public/favicon.ico`.
 
-6. **Design system tokens** — `src/styles.css`
-   - Warm parchment background, deep navy primary, muted gold accent
-   - Serif display font (e.g. Fraunces) for headings via `<link>` in `__root.tsx`, Inter for body
-   - All colors as HSL semantic tokens; shadcn variants updated to match
+### 4. "Install App" UI Button
+Add a small, non-intrusive "Install App" button to the authenticated layout (e.g., in the header or user menu). It will:
+- Listen for the browser's `beforeinstallprompt` event and capture the prompt.
+- Show the button only when installation is possible.
+- Call the prompt when clicked.
+- Hide the button after the app is installed or if the browser/OS does not support it (iOS Safari will not show it because it uses Share > Add to Home Screen).
 
-## Out of scope for Phase 1
+This adds UI only; it does not change auth, routing, or feature logic.
 
-AI server functions, analyzer/quiz/chat UIs, threaded messages, saved analyses — those are Phases 2–5 from the approved plan.
+### 5. Optional: Dashboard Install Reminder
+Add a one-line card or banner on the Dashboard that explains the install option for Android users, with the same guarded behavior. This can be skipped if you prefer to keep the dashboard minimal; I will include it only if you approve.
 
-## Technical notes
+## What Will NOT Change
 
-- Route files use flat dot notation; `_authenticated/route.tsx` is the layout gate.
-- Landing page rewrites `src/routes/index.tsx` (not a new sibling) per the placeholder rule.
-- Profiles migration includes GRANTs in the same file as CREATE TABLE.
-- Google OAuth `redirectTo` = `${window.location.origin}/auth/callback` handled by a small callback route that navigates to `/dashboard` after session hydration.
+- All existing routes, pages, AI features (Analyzer, Linguistics, Quiz, Chat), server functions, and database logic remain untouched.
+- Authentication flow (Google + email sign-in) remains unchanged.
+- The existing design system (colors, fonts, Tailwind tokens) stays the same; only the brand icon and PWA metadata are added.
+- No service worker, no offline caching, no `vite-plugin-pwa` — keeping the build simple and preview-safe.
+- No existing files are deleted except the template `public/favicon.ico`.
 
-## Approve to build
+## Risks and Limitations
 
-Once you approve, I'll implement all six items above in one pass and then we move to Phase 2 (AI server functions + remaining tables).
+1. **No offline support.** The installed app will still require an internet connection. If you want offline access later, that requires a separate service-worker plan.
+2. **Browser-dependent install button.** The "Install App" button only appears on browsers that support `beforeinstallprompt` (e.g., Chrome/Edge on Android). On iOS Safari, users must manually use Share > Add to Home Screen.
+3. **Splash screen is browser-generated.** Chrome/Android creates the splash screen from the manifest name, background color, theme color, and icons. The exact appearance is controlled by the browser, not by a custom image.
+4. **Auth and deep links should still work.** TanStack Start's routing handles auth redirects; the manifest will point to `/` as the start URL. If a user opens the installed app, they will land on the home page and then be redirected by the existing auth logic.
+5. **Preview vs. published behavior.** The install prompt will only appear on the published app or a public preview; it may not trigger inside the Lovable editor preview.
+
+## Approval Request
+If you approve this plan, I will implement it in this order:
+1. Generate brand icons and favicon.
+2. Create the manifest.
+3. Update `__root.tsx` head metadata.
+4. Remove the default `favicon.ico`.
+5. Add the Install App button to the authenticated layout.
+6. Run a build check to verify nothing is broken.
+
+Reply with **"approve"** or let me know if you want to adjust any part (e.g., add a dashboard reminder, change icon colors, or skip the install button and rely only on the browser's native prompt).

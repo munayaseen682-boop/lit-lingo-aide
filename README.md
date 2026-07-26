@@ -1,7 +1,8 @@
 #...DashboardshboardLitLingo AI
 
-### 🌐 Live Deployment URL
-> **[👉 Click Here to Open the Live LitLingo AI Application](https://github.com/munayaseen682-boop/lit-lingo-aide)**
+## 🌐 Live Deployment URL
+
+👉 [Click Here to Open the Live LitLingo AI Application](https://lit-lingo-aide.lovable.app/)
 
 ---
 
@@ -15,8 +16,10 @@
 ---
 
 ### b. Live Deployed URL
+
 The application is fully deployed and hosted live at the following public URL:
-*   **[👉 Click Here to Open LitLingo AI](https://github.com/munayaseen682-boop/lit-lingo-aide)**
+
+👉 [Click Here to Open LitLingo AI](https://lit-lingo-aide.lovable.app/)
 
 ---
 

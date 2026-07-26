@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { BookOpen, Sparkles, GraduationCap, MessagesSquare, ArrowRight } from "lucide-react";
+import { BookOpen, Sparkles, GraduationCap, MessagesSquare, ArrowRight, Trophy } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 
 export const Route = createFileRoute("/_authenticated/dashboard")({
@@ -37,6 +37,13 @@ const tools = [
     title: "AI Tutor Chat",
     desc: "Threaded conversations with a tutor that remembers context. English and Urdu.",
     to: "/chat" as const,
+    available: true,
+  },
+  {
+    icon: Trophy,
+    title: "BPSC & Competitive Exam Prep",
+    desc: "Primary focus on BPSC (Balochistan). Also PCS, CSS, English Literature & Linguistics Lectureship. Past papers, long questions, study planner, and answer evaluator.",
+    to: "/exam-prep" as const,
     available: true,
   },
 

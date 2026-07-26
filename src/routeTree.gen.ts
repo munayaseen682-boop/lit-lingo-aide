@@ -14,6 +14,7 @@ import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedQuizRouteImport } from './routes/_authenticated/quiz'
 import { Route as AuthenticatedLinguisticsRouteImport } from './routes/_authenticated/linguistics'
+import { Route as AuthenticatedExamPrepRouteImport } from './routes/_authenticated/exam-prep'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedChatRouteImport } from './routes/_authenticated/chat'
 import { Route as AuthenticatedAnalyzeRouteImport } from './routes/_authenticated/analyze'
@@ -43,6 +44,11 @@ const AuthenticatedLinguisticsRoute =
     path: '/linguistics',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedExamPrepRoute = AuthenticatedExamPrepRouteImport.update({
+  id: '/exam-prep',
+  path: '/exam-prep',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
@@ -65,6 +71,7 @@ export interface FileRoutesByFullPath {
   '/analyze': typeof AuthenticatedAnalyzeRoute
   '/chat': typeof AuthenticatedChatRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/exam-prep': typeof AuthenticatedExamPrepRoute
   '/linguistics': typeof AuthenticatedLinguisticsRoute
   '/quiz': typeof AuthenticatedQuizRoute
 }
@@ -74,6 +81,7 @@ export interface FileRoutesByTo {
   '/analyze': typeof AuthenticatedAnalyzeRoute
   '/chat': typeof AuthenticatedChatRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/exam-prep': typeof AuthenticatedExamPrepRoute
   '/linguistics': typeof AuthenticatedLinguisticsRoute
   '/quiz': typeof AuthenticatedQuizRoute
 }
@@ -85,6 +93,7 @@ export interface FileRoutesById {
   '/_authenticated/analyze': typeof AuthenticatedAnalyzeRoute
   '/_authenticated/chat': typeof AuthenticatedChatRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
+  '/_authenticated/exam-prep': typeof AuthenticatedExamPrepRoute
   '/_authenticated/linguistics': typeof AuthenticatedLinguisticsRoute
   '/_authenticated/quiz': typeof AuthenticatedQuizRoute
 }
@@ -96,6 +105,7 @@ export interface FileRouteTypes {
     | '/analyze'
     | '/chat'
     | '/dashboard'
+    | '/exam-prep'
     | '/linguistics'
     | '/quiz'
   fileRoutesByTo: FileRoutesByTo
@@ -105,6 +115,7 @@ export interface FileRouteTypes {
     | '/analyze'
     | '/chat'
     | '/dashboard'
+    | '/exam-prep'
     | '/linguistics'
     | '/quiz'
   id:
@@ -115,6 +126,7 @@ export interface FileRouteTypes {
     | '/_authenticated/analyze'
     | '/_authenticated/chat'
     | '/_authenticated/dashboard'
+    | '/_authenticated/exam-prep'
     | '/_authenticated/linguistics'
     | '/_authenticated/quiz'
   fileRoutesById: FileRoutesById
@@ -162,6 +174,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedLinguisticsRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/exam-prep': {
+      id: '/_authenticated/exam-prep'
+      path: '/exam-prep'
+      fullPath: '/exam-prep'
+      preLoaderRoute: typeof AuthenticatedExamPrepRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/dashboard': {
       id: '/_authenticated/dashboard'
       path: '/dashboard'
@@ -190,6 +209,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedAnalyzeRoute: typeof AuthenticatedAnalyzeRoute
   AuthenticatedChatRoute: typeof AuthenticatedChatRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
+  AuthenticatedExamPrepRoute: typeof AuthenticatedExamPrepRoute
   AuthenticatedLinguisticsRoute: typeof AuthenticatedLinguisticsRoute
   AuthenticatedQuizRoute: typeof AuthenticatedQuizRoute
 }
@@ -198,6 +218,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAnalyzeRoute: AuthenticatedAnalyzeRoute,
   AuthenticatedChatRoute: AuthenticatedChatRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
+  AuthenticatedExamPrepRoute: AuthenticatedExamPrepRoute,
   AuthenticatedLinguisticsRoute: AuthenticatedLinguisticsRoute,
   AuthenticatedQuizRoute: AuthenticatedQuizRoute,
 }
@@ -213,13 +234,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

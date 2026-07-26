@@ -64,7 +64,7 @@ function ResultCard({ title, pending, error, data }: { title: string; pending: b
             <Loader2 className="h-4 w-4 animate-spin" /> Generating… this can take 10–30 seconds.
           </div>
         )}
-        {error && !pending && (
+        {!!error && !pending && (
           <Alert variant="destructive">
             <AlertCircle className="h-4 w-4" />
             <AlertTitle>Something went wrong</AlertTitle>

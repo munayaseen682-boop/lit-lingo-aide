@@ -1,4 +1,4 @@
-# LitLingo AI
+DashboardshboardLitLingo AI
 
 ### 🌐 Live Deployment URL
 > **[👉 Click Here to Open the Live LitLingo AI Application](https://github.com/munayaseen682-boop/lit-lingo-aide)**
@@ -42,13 +42,19 @@ The application is fully deployed and hosted live at the following public URL:
 
 ---
 
-### f. Application Screenshots
-1.  **Dashboard View:** `![Dashboard Blueprint](placeholder)`
-2.  **AI Chat Interaction:** `![AI Assistant in Action](placeholder)`
-3.  **Literature Study Tool:** `![Study Module Page](placeholder)`
+## f. Application Screenshots
 
----
+### Dashboard
+![LitLingo AI Dashboard](dashboard.png)
 
+### Literature Analysis
+![Literature Analysis](literature-analysis.png)
+
+### AI Tutor Chat
+![AI Tutor Chat](ai-tutor-chat.png)
+
+### Quiz Generator
+![Quiz Generator](quiz-generator.png)
 ### g. How to Run the Project Locally
 To run this project on your local machine for evaluation, follow these steps:
 

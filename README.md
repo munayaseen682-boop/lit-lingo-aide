@@ -42,21 +42,22 @@ The application is fully deployed and hosted live at the following public URL:
 
 ---
 
-## f. Application Screenshots
+## f. ## Application Screenshots
 
 ### Dashboard
-![LitLingo AI Dashboard](dashboard.png)
+![LitLingo AI Dashboard](Screenshot_20260726-180844.png)
 
 ### Literature Analysis
-![Literature Analysis](literature-analysis.png)
+![Literature Analysis](Screenshot_20260726-181140.png)
 
 ### AI Tutor Chat
-![AI Tutor Chat](ai-tutor-chat.png)
+![AI Tutor Chat](Screenshot_20260726-181259.png)
 
 ### Quiz Generator
-![Quiz Generator](quiz-generator.png)
-### g. How to Run the Project Locally
-To run this project on your local machine for evaluation, follow these steps:
+![Quiz Generator](Screenshot_20260726-181419.png)
+
+### Additional App Feature
+![LitLingo AI Feature](Screenshot_20260726-181519.png)
 
 1.  **Clone the Repository:**
     ```bash

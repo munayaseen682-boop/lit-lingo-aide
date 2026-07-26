@@ -68,7 +68,7 @@ function ResultCard({ title, pending, error, data }: { title: string; pending: b
           <Alert variant="destructive">
             <AlertCircle className="h-4 w-4" />
             <AlertTitle>Something went wrong</AlertTitle>
-            <AlertDescription>{error instanceof Error ? error.message : String(error ?? "Unknown error")}</AlertDescription>
+            <AlertDescription>{String(error instanceof Error ? error.message : error ?? "Unknown error")}</AlertDescription>
           </Alert>
         )}
         {data && !pending && <div className="prose prose-neutral max-w-none">{renderMarkdown(data)}</div>}

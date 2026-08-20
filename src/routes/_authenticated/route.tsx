@@ -11,7 +11,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { LogOut, BookOpen, Sparkles, GraduationCap, MessagesSquare, LayoutDashboard, Download, Trophy } from "lucide-react";
+import { LogOut, BookOpen, Sparkles, GraduationCap, MessagesSquare, LayoutDashboard, Download, Trophy, Captions } from "lucide-react";
 import { useQueryClient } from "@tanstack/react-query";
 
 interface BeforeInstallPromptEvent extends Event {
@@ -36,6 +36,7 @@ const navItems = [
   { to: "/quiz" as const, label: "Quiz", icon: GraduationCap, disabled: false },
   { to: "/chat" as const, label: "Chat", icon: MessagesSquare, disabled: false },
   { to: "/exam-prep" as const, label: "Exam Prep", icon: Trophy, disabled: false },
+  { to: "/captions" as const, label: "Captions", icon: Captions, disabled: false },
 ];
 
 function AuthedLayout() {

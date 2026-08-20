@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { BookOpen, Sparkles, GraduationCap, MessagesSquare, ArrowRight, Trophy } from "lucide-react";
+import { BookOpen, Sparkles, GraduationCap, MessagesSquare, ArrowRight, Trophy, Captions } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 
 export const Route = createFileRoute("/_authenticated/dashboard")({
@@ -46,7 +46,13 @@ const tools = [
     to: "/exam-prep" as const,
     available: true,
   },
-
+  {
+    icon: Captions,
+    title: "Caption Generator",
+    desc: "Turn a voice-over script into timed English or Urdu YouTube captions and export an SRT file.",
+    to: "/captions" as const,
+    available: true,
+  },
 ];
 
 function Dashboard() {

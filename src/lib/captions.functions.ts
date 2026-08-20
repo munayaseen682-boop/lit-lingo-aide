@@ -12,8 +12,8 @@ const InputSchema = z.object({
 const SegmentsSchema = z.object({
   segments: z.array(
     z.object({
-      english: z.string().default(""),
-      urdu: z.string().default(""),
+      english: z.string(),
+      urdu: z.string(),
     }),
   ),
 });

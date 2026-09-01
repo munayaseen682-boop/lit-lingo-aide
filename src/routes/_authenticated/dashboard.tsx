@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { BookOpen, Sparkles, GraduationCap, MessagesSquare, ArrowRight, Trophy, Captions } from "lucide-react";
+import { BookOpen, Sparkles, GraduationCap, MessagesSquare, ArrowRight, Trophy, Clapperboard } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 
 export const Route = createFileRoute("/_authenticated/dashboard")({

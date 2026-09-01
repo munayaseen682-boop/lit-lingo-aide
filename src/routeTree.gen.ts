@@ -18,7 +18,6 @@ import { Route as AuthenticatedLinguisticsRouteImport } from './routes/_authenti
 import { Route as AuthenticatedExamPrepRouteImport } from './routes/_authenticated/exam-prep'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedChatRouteImport } from './routes/_authenticated/chat'
-import { Route as AuthenticatedCaptionsRouteImport } from './routes/_authenticated/captions'
 import { Route as AuthenticatedAnalyzeRouteImport } from './routes/_authenticated/analyze'
 
 const AuthRoute = AuthRouteImport.update({
@@ -66,11 +65,6 @@ const AuthenticatedChatRoute = AuthenticatedChatRouteImport.update({
   path: '/chat',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
-const AuthenticatedCaptionsRoute = AuthenticatedCaptionsRouteImport.update({
-  id: '/captions',
-  path: '/captions',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
 const AuthenticatedAnalyzeRoute = AuthenticatedAnalyzeRouteImport.update({
   id: '/analyze',
   path: '/analyze',
@@ -81,7 +75,6 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/analyze': typeof AuthenticatedAnalyzeRoute
-  '/captions': typeof AuthenticatedCaptionsRoute
   '/chat': typeof AuthenticatedChatRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/exam-prep': typeof AuthenticatedExamPrepRoute
@@ -93,7 +86,6 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/analyze': typeof AuthenticatedAnalyzeRoute
-  '/captions': typeof AuthenticatedCaptionsRoute
   '/chat': typeof AuthenticatedChatRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/exam-prep': typeof AuthenticatedExamPrepRoute
@@ -107,7 +99,6 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
   '/_authenticated/analyze': typeof AuthenticatedAnalyzeRoute
-  '/_authenticated/captions': typeof AuthenticatedCaptionsRoute
   '/_authenticated/chat': typeof AuthenticatedChatRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/exam-prep': typeof AuthenticatedExamPrepRoute
@@ -121,7 +112,6 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/analyze'
-    | '/captions'
     | '/chat'
     | '/dashboard'
     | '/exam-prep'
@@ -133,7 +123,6 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/analyze'
-    | '/captions'
     | '/chat'
     | '/dashboard'
     | '/exam-prep'
@@ -146,7 +135,6 @@ export interface FileRouteTypes {
     | '/_authenticated'
     | '/auth'
     | '/_authenticated/analyze'
-    | '/_authenticated/captions'
     | '/_authenticated/chat'
     | '/_authenticated/dashboard'
     | '/_authenticated/exam-prep'
@@ -226,13 +214,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedChatRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/_authenticated/captions': {
-      id: '/_authenticated/captions'
-      path: '/captions'
-      fullPath: '/captions'
-      preLoaderRoute: typeof AuthenticatedCaptionsRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
     '/_authenticated/analyze': {
       id: '/_authenticated/analyze'
       path: '/analyze'
@@ -245,7 +226,6 @@ declare module '@tanstack/react-router' {
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedAnalyzeRoute: typeof AuthenticatedAnalyzeRoute
-  AuthenticatedCaptionsRoute: typeof AuthenticatedCaptionsRoute
   AuthenticatedChatRoute: typeof AuthenticatedChatRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedExamPrepRoute: typeof AuthenticatedExamPrepRoute
@@ -256,7 +236,6 @@ interface AuthenticatedRouteRouteChildren {
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAnalyzeRoute: AuthenticatedAnalyzeRoute,
-  AuthenticatedCaptionsRoute: AuthenticatedCaptionsRoute,
   AuthenticatedChatRoute: AuthenticatedChatRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedExamPrepRoute: AuthenticatedExamPrepRoute,

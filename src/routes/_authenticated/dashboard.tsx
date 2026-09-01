@@ -47,10 +47,10 @@ const tools = [
     available: true,
   },
   {
-    icon: Captions,
-    title: "Caption Generator",
-    desc: "Turn a voice-over script into timed English or Urdu YouTube captions and export an SRT file.",
-    to: "/captions" as const,
+    icon: Clapperboard,
+    title: "🎬 YouTube Slide Generator",
+    desc: "Turn a topic into a branded slide deck with voice-over scripts for your YouTube videos.",
+    to: "/slides" as const,
     available: true,
   },
 ];

@@ -12,12 +12,12 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedSlidesRouteImport } from './routes/_authenticated/slides'
 import { Route as AuthenticatedQuizRouteImport } from './routes/_authenticated/quiz'
 import { Route as AuthenticatedLinguisticsRouteImport } from './routes/_authenticated/linguistics'
 import { Route as AuthenticatedExamPrepRouteImport } from './routes/_authenticated/exam-prep'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedChatRouteImport } from './routes/_authenticated/chat'
-import { Route as AuthenticatedCaptionsRouteImport } from './routes/_authenticated/captions'
 import { Route as AuthenticatedAnalyzeRouteImport } from './routes/_authenticated/analyze'
 
 const AuthRoute = AuthRouteImport.update({
@@ -33,6 +33,11 @@ const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedSlidesRoute = AuthenticatedSlidesRouteImport.update({
+  id: '/slides',
+  path: '/slides',
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedQuizRoute = AuthenticatedQuizRouteImport.update({
   id: '/quiz',
@@ -60,11 +65,6 @@ const AuthenticatedChatRoute = AuthenticatedChatRouteImport.update({
   path: '/chat',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
-const AuthenticatedCaptionsRoute = AuthenticatedCaptionsRouteImport.update({
-  id: '/captions',
-  path: '/captions',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
 const AuthenticatedAnalyzeRoute = AuthenticatedAnalyzeRouteImport.update({
   id: '/analyze',
   path: '/analyze',
@@ -75,23 +75,23 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/analyze': typeof AuthenticatedAnalyzeRoute
-  '/captions': typeof AuthenticatedCaptionsRoute
   '/chat': typeof AuthenticatedChatRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/exam-prep': typeof AuthenticatedExamPrepRoute
   '/linguistics': typeof AuthenticatedLinguisticsRoute
   '/quiz': typeof AuthenticatedQuizRoute
+  '/slides': typeof AuthenticatedSlidesRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/analyze': typeof AuthenticatedAnalyzeRoute
-  '/captions': typeof AuthenticatedCaptionsRoute
   '/chat': typeof AuthenticatedChatRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/exam-prep': typeof AuthenticatedExamPrepRoute
   '/linguistics': typeof AuthenticatedLinguisticsRoute
   '/quiz': typeof AuthenticatedQuizRoute
+  '/slides': typeof AuthenticatedSlidesRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -99,12 +99,12 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
   '/_authenticated/analyze': typeof AuthenticatedAnalyzeRoute
-  '/_authenticated/captions': typeof AuthenticatedCaptionsRoute
   '/_authenticated/chat': typeof AuthenticatedChatRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/exam-prep': typeof AuthenticatedExamPrepRoute
   '/_authenticated/linguistics': typeof AuthenticatedLinguisticsRoute
   '/_authenticated/quiz': typeof AuthenticatedQuizRoute
+  '/_authenticated/slides': typeof AuthenticatedSlidesRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -112,35 +112,35 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/analyze'
-    | '/captions'
     | '/chat'
     | '/dashboard'
     | '/exam-prep'
     | '/linguistics'
     | '/quiz'
+    | '/slides'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/auth'
     | '/analyze'
-    | '/captions'
     | '/chat'
     | '/dashboard'
     | '/exam-prep'
     | '/linguistics'
     | '/quiz'
+    | '/slides'
   id:
     | '__root__'
     | '/'
     | '/_authenticated'
     | '/auth'
     | '/_authenticated/analyze'
-    | '/_authenticated/captions'
     | '/_authenticated/chat'
     | '/_authenticated/dashboard'
     | '/_authenticated/exam-prep'
     | '/_authenticated/linguistics'
     | '/_authenticated/quiz'
+    | '/_authenticated/slides'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -171,6 +171,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/slides': {
+      id: '/_authenticated/slides'
+      path: '/slides'
+      fullPath: '/slides'
+      preLoaderRoute: typeof AuthenticatedSlidesRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/quiz': {
       id: '/_authenticated/quiz'
@@ -207,13 +214,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedChatRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/_authenticated/captions': {
-      id: '/_authenticated/captions'
-      path: '/captions'
-      fullPath: '/captions'
-      preLoaderRoute: typeof AuthenticatedCaptionsRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
     '/_authenticated/analyze': {
       id: '/_authenticated/analyze'
       path: '/analyze'
@@ -226,22 +226,22 @@ declare module '@tanstack/react-router' {
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedAnalyzeRoute: typeof AuthenticatedAnalyzeRoute
-  AuthenticatedCaptionsRoute: typeof AuthenticatedCaptionsRoute
   AuthenticatedChatRoute: typeof AuthenticatedChatRoute
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedExamPrepRoute: typeof AuthenticatedExamPrepRoute
   AuthenticatedLinguisticsRoute: typeof AuthenticatedLinguisticsRoute
   AuthenticatedQuizRoute: typeof AuthenticatedQuizRoute
+  AuthenticatedSlidesRoute: typeof AuthenticatedSlidesRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAnalyzeRoute: AuthenticatedAnalyzeRoute,
-  AuthenticatedCaptionsRoute: AuthenticatedCaptionsRoute,
   AuthenticatedChatRoute: AuthenticatedChatRoute,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedExamPrepRoute: AuthenticatedExamPrepRoute,
   AuthenticatedLinguisticsRoute: AuthenticatedLinguisticsRoute,
   AuthenticatedQuizRoute: AuthenticatedQuizRoute,
+  AuthenticatedSlidesRoute: AuthenticatedSlidesRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =

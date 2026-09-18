@@ -33,6 +33,10 @@ export const Route = createFileRoute("/_authenticated/exam-prep")({
         content:
           "AI preparation for BPSC (primary), PCS, CSS, English Literature & Linguistics Lectureship. Past paper analysis, long-question guides, study planner, and answer evaluator.",
       },
+      { property: "og:title", content: "BPSC & Competitive Exam Prep — LitLingo AI" },
+      { property: "og:description", content: "Prepare for BPSC, PCS, CSS, and English Literature or Linguistics lectureship examinations." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
     ],
   }),
 });

@@ -19,6 +19,8 @@ export const Route = createFileRoute("/")({
         content:
           "Analyze literature, learn linguistics, generate quizzes, and chat with an AI tutor built for humanities students.",
       },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
     ],
   }),
 });

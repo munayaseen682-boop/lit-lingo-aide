@@ -17,6 +17,10 @@ export const Route = createFileRoute("/_authenticated/chat")({
         content:
           "Chat with an AI tutor for English Literature, Linguistics, Grammar, and Academic Writing. Supports English and Urdu.",
       },
+      { property: "og:title", content: "AI Tutor Chat — LitLingo AI" },
+      { property: "og:description", content: "Get AI-powered explanations for English Literature, Linguistics, Grammar, and Academic Writing." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
     ],
   }),
 });

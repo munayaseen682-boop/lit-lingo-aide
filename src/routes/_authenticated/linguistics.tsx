@@ -15,6 +15,10 @@ export const Route = createFileRoute("/_authenticated/linguistics")({
     meta: [
       { title: "Linguistics & Grammar — LitLingo AI" },
       { name: "description", content: "Get AI-powered grammar corrections, style suggestions, and linguistic insights on your writing." },
+      { property: "og:title", content: "Linguistics & Grammar — LitLingo AI" },
+      { property: "og:description", content: "Learn linguistics and improve grammar with focused AI explanations and feedback." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
     ],
   }),
 });

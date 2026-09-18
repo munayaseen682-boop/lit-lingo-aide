@@ -1,12 +1,25 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { BookOpen, Sparkles, GraduationCap, MessagesSquare, ArrowRight, Trophy, Clapperboard } from "lucide-react";
+import { BookOpen, Sparkles, GraduationCap, MessagesSquare, ArrowRight, Trophy } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 
 export const Route = createFileRoute("/_authenticated/dashboard")({
   component: Dashboard,
   head: () => ({
-    meta: [{ title: "Dashboard — LitLingo AI" }],
+    meta: [
+      { title: "Student Dashboard — LitLingo AI" },
+      {
+        name: "description",
+        content: "Access AI study tools for English Literature, Linguistics, quizzes, tutoring, and competitive examination preparation.",
+      },
+      { property: "og:title", content: "Student Dashboard — LitLingo AI" },
+      {
+        property: "og:description",
+        content: "Study English Literature and Linguistics with focused AI learning and examination tools.",
+      },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
+    ],
   }),
 });
 
@@ -46,13 +59,6 @@ const tools = [
     to: "/exam-prep" as const,
     available: true,
   },
-  {
-    icon: Clapperboard,
-    title: "🎬 YouTube Slide Generator",
-    desc: "Turn a topic into a branded slide deck with voice-over scripts for your YouTube videos.",
-    to: "/slides" as const,
-    available: true,
-  },
 ];
 
 function Dashboard() {
@@ -65,8 +71,8 @@ function Dashboard() {
         <h1 className="font-serif text-4xl font-semibold md:text-5xl">
           Welcome back, <span className="text-accent">{name}</span>.
         </h1>
-        <p className="mt-2 text-muted-foreground">
-          Pick a tool below to start your session.
+        <p className="mt-2 max-w-2xl text-muted-foreground">
+          Continue learning English Literature and Linguistics, practise questions, or prepare for your examinations.
         </p>
       </div>
 

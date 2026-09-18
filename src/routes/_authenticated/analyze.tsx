@@ -16,6 +16,10 @@ export const Route = createFileRoute("/_authenticated/analyze")({
     meta: [
       { title: "Literature Analyzer — LitLingo AI" },
       { name: "description", content: "Paste a literary passage and get an AI analysis of themes, symbolism, devices, and structure." },
+      { property: "og:title", content: "Literature Analyzer — LitLingo AI" },
+      { property: "og:description", content: "Analyze literary themes, symbolism, devices, and structure with LitLingo AI." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
     ],
   }),
 });

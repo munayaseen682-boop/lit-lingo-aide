@@ -22,6 +22,10 @@ export const Route = createFileRoute("/_authenticated/quiz")({
     meta: [
       { title: "Quiz Generator — LitLingo AI" },
       { name: "description", content: "Turn any literary work, author, or linguistics concept into an AI-generated multiple-choice quiz." },
+      { property: "og:title", content: "Quiz Generator — LitLingo AI" },
+      { property: "og:description", content: "Practise English Literature and Linguistics with focused AI-generated multiple-choice quizzes." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
     ],
   }),
 });

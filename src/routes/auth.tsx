@@ -16,6 +16,10 @@ export const Route = createFileRoute("/auth")({
     meta: [
       { title: "Sign in — LitLingo AI" },
       { name: "description", content: "Sign in or create your LitLingo AI account." },
+      { property: "og:title", content: "Sign in — LitLingo AI" },
+      { property: "og:description", content: "Sign in to access LitLingo AI study tools for English Literature and Linguistics." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
     ],
   }),
 });

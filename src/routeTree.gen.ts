@@ -9,35 +9,50 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as AuthRouteImport } from './routes/auth'
-import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as AuthenticatedQuizRouteImport } from './routes/_authenticated/quiz'
-import { Route as AuthenticatedLinguisticsRouteImport } from './routes/_authenticated/linguistics'
-import { Route as AuthenticatedExamPrepRouteImport } from './routes/_authenticated/exam-prep'
-import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
-import { Route as AuthenticatedChatRouteImport } from './routes/_authenticated/chat'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
+import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedAnalyzeRouteImport } from './routes/_authenticated/analyze'
+import { Route as AuthenticatedChatRouteImport } from './routes/_authenticated/chat'
+import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
+import { Route as AuthenticatedExamPrepRouteImport } from './routes/_authenticated/exam-prep'
+import { Route as AuthenticatedLinguisticsRouteImport } from './routes/_authenticated/linguistics'
+import { Route as AuthenticatedQuizRouteImport } from './routes/_authenticated/quiz'
 import { Route as AuthenticatedChatIndexRouteImport } from './routes/_authenticated/chat.index'
 import { Route as AuthenticatedChatThreadIdRouteImport } from './routes/_authenticated/chat.$threadId'
 
-const AuthRoute = AuthRouteImport.update({
-  id: '/auth',
-  path: '/auth',
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
   id: '/_authenticated',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AuthenticatedQuizRoute = AuthenticatedQuizRouteImport.update({
-  id: '/quiz',
-  path: '/quiz',
+const AuthenticatedAnalyzeRoute = AuthenticatedAnalyzeRouteImport.update({
+  id: '/analyze',
+  path: '/analyze',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedChatRoute = AuthenticatedChatRouteImport.update({
+  id: '/chat',
+  path: '/chat',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedExamPrepRoute = AuthenticatedExamPrepRouteImport.update({
+  id: '/exam-prep',
+  path: '/exam-prep',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedLinguisticsRoute =
@@ -46,24 +61,9 @@ const AuthenticatedLinguisticsRoute =
     path: '/linguistics',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
-const AuthenticatedExamPrepRoute = AuthenticatedExamPrepRouteImport.update({
-  id: '/exam-prep',
-  path: '/exam-prep',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
-const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
-  id: '/dashboard',
-  path: '/dashboard',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
-const AuthenticatedChatRoute = AuthenticatedChatRouteImport.update({
-  id: '/chat',
-  path: '/chat',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
-const AuthenticatedAnalyzeRoute = AuthenticatedAnalyzeRouteImport.update({
-  id: '/analyze',
-  path: '/analyze',
+const AuthenticatedQuizRoute = AuthenticatedQuizRouteImport.update({
+  id: '/quiz',
+  path: '/quiz',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedChatIndexRoute = AuthenticatedChatIndexRouteImport.update({
@@ -162,11 +162,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/auth': {
-      id: '/auth'
-      path: '/auth'
-      fullPath: '/auth'
-      preLoaderRoute: typeof AuthRouteImport
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_authenticated': {
@@ -176,39 +176,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_authenticated/quiz': {
-      id: '/_authenticated/quiz'
-      path: '/quiz'
-      fullPath: '/quiz'
-      preLoaderRoute: typeof AuthenticatedQuizRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/linguistics': {
-      id: '/_authenticated/linguistics'
-      path: '/linguistics'
-      fullPath: '/linguistics'
-      preLoaderRoute: typeof AuthenticatedLinguisticsRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/exam-prep': {
-      id: '/_authenticated/exam-prep'
-      path: '/exam-prep'
-      fullPath: '/exam-prep'
-      preLoaderRoute: typeof AuthenticatedExamPrepRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/dashboard': {
-      id: '/_authenticated/dashboard'
-      path: '/dashboard'
-      fullPath: '/dashboard'
-      preLoaderRoute: typeof AuthenticatedDashboardRouteImport
+    '/_authenticated/analyze': {
+      id: '/_authenticated/analyze'
+      path: '/analyze'
+      fullPath: '/analyze'
+      preLoaderRoute: typeof AuthenticatedAnalyzeRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/chat': {
@@ -218,11 +197,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedChatRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/_authenticated/analyze': {
-      id: '/_authenticated/analyze'
-      path: '/analyze'
-      fullPath: '/analyze'
-      preLoaderRoute: typeof AuthenticatedAnalyzeRouteImport
+    '/_authenticated/dashboard': {
+      id: '/_authenticated/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof AuthenticatedDashboardRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/exam-prep': {
+      id: '/_authenticated/exam-prep'
+      path: '/exam-prep'
+      fullPath: '/exam-prep'
+      preLoaderRoute: typeof AuthenticatedExamPrepRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/linguistics': {
+      id: '/_authenticated/linguistics'
+      path: '/linguistics'
+      fullPath: '/linguistics'
+      preLoaderRoute: typeof AuthenticatedLinguisticsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/quiz': {
+      id: '/_authenticated/quiz'
+      path: '/quiz'
+      fullPath: '/quiz'
+      preLoaderRoute: typeof AuthenticatedQuizRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/chat/': {

@@ -8,6 +8,13 @@
       "when": 1790190897146,
       "tag": "0000_create_chat_history",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1792072773019,
+      "tag": "0001_study_progress",
+      "breakpoints": true
     }
   ]
 }

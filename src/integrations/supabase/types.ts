@@ -94,6 +94,117 @@ export type Database = {
         }
         Relationships: []
       }
+      study_activity: {
+        Row: {
+          created_at: string
+          id: string
+          score: number | null
+          tool: string
+          topic: string
+          total: number | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          score?: number | null
+          tool: string
+          topic: string
+          total?: number | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          score?: number | null
+          tool?: string
+          topic?: string
+          total?: number | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      study_bookmarks: {
+        Row: {
+          concept_key: string
+          created_at: string
+          id: string
+          label: string
+          user_id: string
+        }
+        Insert: {
+          concept_key: string
+          created_at?: string
+          id?: string
+          label: string
+          user_id: string
+        }
+        Update: {
+          concept_key?: string
+          created_at?: string
+          id?: string
+          label?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      study_notes: {
+        Row: {
+          content: string
+          created_at: string
+          id: string
+          source: string
+          title: string
+          user_id: string
+        }
+        Insert: {
+          content: string
+          created_at?: string
+          id?: string
+          source?: string
+          title: string
+          user_id: string
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          id?: string
+          source?: string
+          title?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      topic_progress: {
+        Row: {
+          best_score: number | null
+          completed: boolean
+          id: string
+          label: string
+          topic_key: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          best_score?: number | null
+          completed?: boolean
+          id?: string
+          label: string
+          topic_key: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          best_score?: number | null
+          completed?: boolean
+          id?: string
+          label?: string
+          topic_key?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

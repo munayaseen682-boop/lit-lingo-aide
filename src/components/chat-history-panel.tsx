@@ -54,7 +54,7 @@ function formatWhen(iso: string) {
 
 export function useThreads() {
   const run = useServerFn(listThreads);
-  return useQuery({ queryKey: threadsQueryKey, queryFn: () => run({ data: {} }) });
+  return useQuery({ queryKey: threadsQueryKey, queryFn: () => run() });
 }
 
 export function ChatHistoryPanel({

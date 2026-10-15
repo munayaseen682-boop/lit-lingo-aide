@@ -85,7 +85,7 @@ function ChatThreadPage() {
     queryFn: () => loadThread({ data: { threadId } }),
   });
 
-  const saved = threadQuery.data?.messages ?? [];
+  const saved: ChatMessage[] = threadQuery.data?.messages ?? [];
   const messages: ChatMessage[] = [
     ...(saved.length === 0 ? [WELCOME] : []),
     ...saved,

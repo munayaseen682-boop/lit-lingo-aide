@@ -107,7 +107,7 @@ function ChatThreadPage() {
       const history: ChatMessage[] = [
         ...saved,
         ...pending,
-        { role: "user", content: userText },
+        { role: "user" as const, content: userText },
       ].slice(-60);
       const res = await run({ data: { messages: history } });
       await persist({

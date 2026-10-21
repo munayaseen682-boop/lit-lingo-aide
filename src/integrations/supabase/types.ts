@@ -14,6 +14,24 @@ export type Database = {
   }
   public: {
     Tables: {
+      ai_daily_usage: {
+        Row: {
+          request_count: number
+          usage_date: string
+          user_id: string
+        }
+        Insert: {
+          request_count?: number
+          usage_date?: string
+          user_id: string
+        }
+        Update: {
+          request_count?: number
+          usage_date?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       chat_messages: {
         Row: {
           content: string
@@ -75,6 +93,7 @@ export type Database = {
           avatar_url: string | null
           created_at: string
           display_name: string | null
+          email: string | null
           id: string
           updated_at: string
         }
@@ -82,6 +101,7 @@ export type Database = {
           avatar_url?: string | null
           created_at?: string
           display_name?: string | null
+          email?: string | null
           id: string
           updated_at?: string
         }
@@ -89,6 +109,7 @@ export type Database = {
           avatar_url?: string | null
           created_at?: string
           display_name?: string | null
+          email?: string | null
           id?: string
           updated_at?: string
         }
@@ -210,7 +231,7 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      consume_ai_allowance: { Args: { p_user_id: string }; Returns: number }
     }
     Enums: {
       [_ in never]: never

@@ -1,7 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
 import { generateText } from "ai";
 import { z } from "zod";
-import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
+import { requireAiAccess } from "./ai-access";
 import { createLovableAiGatewayProvider } from "./ai-gateway.server";
 
 const InputSchema = z.object({
@@ -36,7 +36,7 @@ Comment on form, structure, or narrative technique.
 Be precise, cite short quoted phrases from the passage, and avoid generic filler.`;
 
 export const analyzeLiterature = createServerFn({ method: "POST" })
-  .middleware([requireSupabaseAuth])
+  .middleware([requireAiAccess])
   .inputValidator((input: unknown) => InputSchema.parse(input))
   .handler(async ({ data }) => {
     const key = process.env.LOVABLE_API_KEY;

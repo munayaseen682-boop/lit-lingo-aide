@@ -1,7 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
 import { generateText, Output, NoObjectGeneratedError } from "ai";
 import { z } from "zod";
-import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
+import { requireAiAccess } from "./ai-access";
 import { createLovableAiGatewayProvider } from "./ai-gateway.server";
 
 const InputSchema = z.object({
@@ -25,7 +25,7 @@ const QuizSchema = z.object({
 export type Quiz = z.infer<typeof QuizSchema>;
 
 export const generateQuiz = createServerFn({ method: "POST" })
-  .middleware([requireSupabaseAuth])
+  .middleware([requireAiAccess])
   .inputValidator((input: unknown) => InputSchema.parse(input))
   .handler(async ({ data }): Promise<Quiz> => {
     const key = process.env.LOVABLE_API_KEY;

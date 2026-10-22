@@ -1,7 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
 import { generateText, type ModelMessage } from "ai";
 import { z } from "zod";
-import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
+import { requireAiAccess } from "./ai-access";
 import { createLovableAiGatewayProvider } from "./ai-gateway.server";
 
 const MessageSchema = z.object({
@@ -33,7 +33,7 @@ TEACHING STYLE:
 Format responses in clean markdown.`;
 
 export const chatWithTutor = createServerFn({ method: "POST" })
-  .middleware([requireSupabaseAuth])
+  .middleware([requireAiAccess])
   .inputValidator((input: unknown) => InputSchema.parse(input))
   .handler(async ({ data }) => {
     const key = process.env.LOVABLE_API_KEY;

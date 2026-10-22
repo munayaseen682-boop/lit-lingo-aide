@@ -1,3 +1,4 @@
+import { SiteFooter } from "@/components/site-extras";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { BookOpen, Sparkles, GraduationCap, MessagesSquare, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -153,13 +154,7 @@ function Landing() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="border-t border-border/60 bg-card/40">
-        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-2 px-6 py-8 text-sm text-muted-foreground md:flex-row">
-          <p>© {new Date().getFullYear()} LitLingo AI — a final Act-AI course project.</p>
-          <p className="font-serif italic">Built for readers who ask better questions.</p>
-        </div>
-      </footer>
+      <SiteFooter />
     </div>
   );
 }

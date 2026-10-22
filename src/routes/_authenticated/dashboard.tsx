@@ -1,3 +1,4 @@
+import { AdSlot } from "@/components/site-extras";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { BookOpen, Sparkles, GraduationCap, MessagesSquare, ArrowRight, Trophy } from "lucide-react";
@@ -136,6 +137,7 @@ function Dashboard() {
         </Card>
       </div>
 
+      <AdSlot />
       <p className="mt-10 text-center text-xs text-muted-foreground">
         <Link to="/" className="hover:text-foreground">← Home</Link>
       </p>

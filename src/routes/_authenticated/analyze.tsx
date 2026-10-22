@@ -1,3 +1,4 @@
+import { AdSlot } from "@/components/site-extras";
 import { createFileRoute } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { useMutation } from "@tanstack/react-query";
@@ -180,6 +181,7 @@ function AnalyzePage() {
           </CardContent>
         </Card>
       )}
+      <AdSlot />
     </div>
   );
 }

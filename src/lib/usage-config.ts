@@ -1,4 +1,4 @@
-export const DAILY_AI_LIMIT = 15;
+export const DAILY_AI_LIMIT = 10;
 
 export function dailyUsageWindow(now = new Date()) {
   const day = now.toISOString().slice(0, 10);

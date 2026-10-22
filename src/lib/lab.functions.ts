@@ -1,6 +1,6 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
-import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
+import { requireAiAccess } from "./ai-access";
 import { generateStructured } from "./ai-structured.server";
 import { labTopic } from "./lab-topics";
 
@@ -20,7 +20,7 @@ const LessonSchema = z.object({
 export type Lesson = z.infer<typeof LessonSchema>;
 
 export const getLabLesson = createServerFn({ method: "POST" })
-  .middleware([requireSupabaseAuth])
+  .middleware([requireAiAccess])
   .inputValidator((i: unknown) =>
     z.object({ topicKey: z.string(), level: z.enum(["beginner", "intermediate", "advanced"]) }).parse(i),
   )

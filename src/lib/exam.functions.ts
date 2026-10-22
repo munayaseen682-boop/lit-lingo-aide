@@ -1,7 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
 import { generateText } from "ai";
 import { z } from "zod";
-import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
+import { requireAiAccess } from "./ai-access";
 import { createLovableAiGatewayProvider } from "./ai-gateway.server";
 
 const EXAMS = ["BPSC", "PCS", "CSS", "English Literature Lectureship", "Linguistics Lectureship"] as const;
@@ -36,7 +36,7 @@ const PrepInput = z.object({
   focus: z.string().max(500).optional(),
 });
 export const generatePrep = createServerFn({ method: "POST" })
-  .middleware([requireSupabaseAuth])
+  .middleware([requireAiAccess])
   .inputValidator((i: unknown) => PrepInput.parse(i))
   .handler(async ({ data }) => {
     const system = `You are LitLingo AI, a senior coach for Pakistani competitive exams (BPSC is the primary focus, then PCS, CSS, English Literature Lectureship, Linguistics Lectureship). ${DISCLAIMER}`;
@@ -88,7 +88,7 @@ const PastPaperInput = z.object({
   paperText: z.string().min(20).max(15000),
 });
 export const analyzePastPaper = createServerFn({ method: "POST" })
-  .middleware([requireSupabaseAuth])
+  .middleware([requireAiAccess])
   .inputValidator((i: unknown) => PastPaperInput.parse(i))
   .handler(async ({ data }) => {
     const system = `You are LitLingo AI, an examiner-style analyst. ${DISCLAIMER}`;
@@ -135,7 +135,7 @@ const LongQInput = z.object({
   count: z.number().int().min(3).max(20).default(10),
 });
 export const recommendLongQuestions = createServerFn({ method: "POST" })
-  .middleware([requireSupabaseAuth])
+  .middleware([requireAiAccess])
   .inputValidator((i: unknown) => LongQInput.parse(i))
   .handler(async ({ data }) => {
     const system = `You are LitLingo AI, an exam coach. ${DISCLAIMER}`;
@@ -161,7 +161,7 @@ const SolveInput = z.object({
   question: z.string().min(5).max(1500),
 });
 export const solveLongQuestion = createServerFn({ method: "POST" })
-  .middleware([requireSupabaseAuth])
+  .middleware([requireAiAccess])
   .inputValidator((i: unknown) => SolveInput.parse(i))
   .handler(async ({ data }) => {
     const system = `You are LitLingo AI, an academic writing coach for competitive exams. ${DISCLAIMER}`;
@@ -215,7 +215,7 @@ const PlanInput = z.object({
   notes: z.string().max(600).optional(),
 });
 export const generateStudyPlan = createServerFn({ method: "POST" })
-  .middleware([requireSupabaseAuth])
+  .middleware([requireAiAccess])
   .inputValidator((i: unknown) => PlanInput.parse(i))
   .handler(async ({ data }) => {
     const system = `You are LitLingo AI, a study-plan coach for Pakistani competitive exams. ${DISCLAIMER}`;
@@ -258,7 +258,7 @@ const EvalInput = z.object({
   answer: z.string().min(30).max(15000),
 });
 export const evaluateAnswer = createServerFn({ method: "POST" })
-  .middleware([requireSupabaseAuth])
+  .middleware([requireAiAccess])
   .inputValidator((i: unknown) => EvalInput.parse(i))
   .handler(async ({ data }) => {
     const system = `You are LitLingo AI, an examiner. ${DISCLAIMER}`;
@@ -307,7 +307,7 @@ const TopicsInput = z.object({
   progressNotes: z.string().max(600).optional(),
 });
 export const importantTopics = createServerFn({ method: "POST" })
-  .middleware([requireSupabaseAuth])
+  .middleware([requireAiAccess])
   .inputValidator((i: unknown) => TopicsInput.parse(i))
   .handler(async ({ data }) => {
     const system = `You are LitLingo AI, an exam strategist. ${DISCLAIMER}`;

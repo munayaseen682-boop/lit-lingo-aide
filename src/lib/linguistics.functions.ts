@@ -1,7 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
 import { generateText } from "ai";
 import { z } from "zod";
-import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
+import { requireAiAccess } from "./ai-access";
 import { createLovableAiGatewayProvider } from "./ai-gateway.server";
 
 const InputSchema = z.object({
@@ -32,7 +32,7 @@ A short encouraging paragraph summarising strengths and top priority to improve.
 Be specific, quote the student's own words, and avoid generic filler.`;
 
 export const analyzeLinguistics = createServerFn({ method: "POST" })
-  .middleware([requireSupabaseAuth])
+  .middleware([requireAiAccess])
   .inputValidator((input: unknown) => InputSchema.parse(input))
   .handler(async ({ data }) => {
     const key = process.env.LOVABLE_API_KEY;

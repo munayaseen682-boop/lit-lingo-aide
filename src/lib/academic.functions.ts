@@ -1,6 +1,6 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
-import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
+import { requireAiAccess } from "./ai-access";
 import { generateStructured } from "./ai-structured.server";
 import { CRITICAL_LENSES, RUBRIC, WRITING_AREAS } from "./academic-config";
 
@@ -16,7 +16,7 @@ const CriticismSchema = z.object({
 export type CriticismResult = z.infer<typeof CriticismSchema>;
 
 export const runCriticism = createServerFn({ method: "POST" })
-  .middleware([requireSupabaseAuth])
+  .middleware([requireAiAccess])
   .inputValidator((i: unknown) =>
     z
       .object({
@@ -62,7 +62,7 @@ const EvalSchema = z.object({
 export type EvalResult = z.infer<typeof EvalSchema>;
 
 export const evaluateAnswer = createServerFn({ method: "POST" })
-  .middleware([requireSupabaseAuth])
+  .middleware([requireAiAccess])
   .inputValidator((i: unknown) =>
     z
       .object({
@@ -108,7 +108,7 @@ const WritingSchema = z.object({
 export type WritingResult = z.infer<typeof WritingSchema>;
 
 export const coachWriting = createServerFn({ method: "POST" })
-  .middleware([requireSupabaseAuth])
+  .middleware([requireAiAccess])
   .inputValidator((i: unknown) =>
     z
       .object({

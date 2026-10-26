@@ -29,6 +29,13 @@
       "when": 1792684262347,
       "tag": "0003_ai_daily_limit_10",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1793040246751,
+      "tag": "0004_remove_ai_daily_allowance",
+      "breakpoints": true
     }
   ]
 }

@@ -1,4 +1,4 @@
-import { SiteFooter, UsageWarning } from "@/components/site-extras";
+import { SiteFooter } from "@/components/site-extras";
 import { createFileRoute, Outlet, redirect, Link, useNavigate, useRouterState } from "@tanstack/react-router";
 import { useEffect, useState, useCallback } from "react";
 import { supabase } from "@/integrations/supabase/client";
@@ -175,7 +175,6 @@ function AuthedLayout() {
         </div>
       </header>
       <main>
-        <UsageWarning />
         <Outlet />
       </main>
       <SiteFooter />

@@ -23,9 +23,9 @@ function Privacy() {
         <h1 className="font-serif text-4xl font-semibold">Privacy Policy</h1>
         <p className="text-sm text-muted-foreground">Last updated: October 2026</p>
         <h2 className="font-serif text-2xl font-semibold">Information we collect</h2>
-        <p>When you create an account we store your name, email address, and sign-up date. We also store the text you submit to our study tools, your chat history, quiz results, and a daily count of your AI requests.</p>
+        <p>When you create an account we store your name, email address, and sign-up date. We also store the text you submit to our study tools, your chat history, and quiz results.</p>
         <h2 className="font-serif text-2xl font-semibold">How we use it</h2>
-        <p>Your information is used to run your account, provide AI study features, save your progress, and enforce fair daily usage limits. Text you submit is sent to an AI model to generate a response. We do not sell your personal information.</p>
+        <p>Your information is used to run your account, provide AI study features, and save your progress. Text you submit is sent to an AI model to generate a response. We do not sell your personal information.</p>
         <h2 className="font-serif text-2xl font-semibold">Cookies and advertising</h2>
         <p>We may show ads served by Google AdSense. Google and its partners use cookies to serve ads based on your prior visits to this and other websites. You can opt out of personalised advertising at <a className="underline" href="https://www.google.com/settings/ads" target="_blank" rel="noreferrer">Google Ads Settings</a>, or learn more at <a className="underline" href="https://policies.google.com/technologies/ads" target="_blank" rel="noreferrer">policies.google.com/technologies/ads</a>.</p>
         <h2 className="font-serif text-2xl font-semibold">Data security and deletion</h2>

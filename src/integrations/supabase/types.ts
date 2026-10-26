@@ -231,7 +231,7 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      consume_ai_allowance: { Args: { p_user_id: string }; Returns: number }
+      [_ in never]: never
     }
     Enums: {
       [_ in never]: never

@@ -9,6 +9,6 @@
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
 
-- All AI server functions use the shared `requireAiAccess` middleware, which authenticates the caller before atomically reserving their database-backed daily allowance; this prevents parallel requests and direct browser calls from bypassing the cap.
-- Account reads use the authenticated client and owner-only RLS; only the server's privileged client can increment AI usage, so users cannot reset their counter.
+- All AI server functions use the shared `requireAiAccess` middleware from `src/lib/ai-access.ts` (an alias of `requireSupabaseAuth`); it authenticates the caller only. No daily AI cap is enforced anywhere — the consume_ai_allowance RPC was dropped and ai_daily_usage is deprecated; do not reintroduce per-user AI limits without the user asking.
+- Account reads use the authenticated client and owner-only RLS.
 - Keep a single root auth-state subscriber and clear protected query caches before logout to avoid stale private data and competing redirects.

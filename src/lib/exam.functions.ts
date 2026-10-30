@@ -24,7 +24,7 @@ function runModel(system: string, prompt: string) {
 function humanizeError(err: unknown, label: string): never {
   const msg = err instanceof Error ? err.message : String(err);
   if (msg.includes("429")) throw new Error("Rate limit reached. Please wait a moment and try again.");
-  if (msg.includes("402")) throw new Error("The AI service is temporarily unavailable. Please try again later.");
+  if ((msg.includes("402") || /payment required|credits/i.test(msg))) throw new Error("The AI service is temporarily unavailable. Please try again later.");
   throw new Error(`${label} failed: ${msg}`);
 }
 

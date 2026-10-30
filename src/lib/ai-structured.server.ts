@@ -9,7 +9,7 @@ function mapError(err: unknown, label: string): Error {
   const msg = err instanceof Error ? err.message : String(err);
   console.error(`[${label}]`, msg);
   if (msg.includes("429")) return new Error("Rate limit reached. Please wait a moment and try again.");
-  if (msg.includes("402")) return new Error("The AI service is temporarily unavailable. Please try again later.");
+  if ((msg.includes("402") || /payment required|credits/i.test(msg))) return new Error("The AI service is temporarily unavailable. Please try again later.");
   if (msg.includes("403")) return new Error("AI access is currently blocked for this workspace.");
   return new Error(`${label} failed. Please try again.`);
 }
